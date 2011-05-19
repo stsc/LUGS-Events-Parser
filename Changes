@@ -1,0 +1,38 @@
+Revision history for Perl extension LUGS::Events::Parser.
+
+0.05  2010-11-19  <schubiger@cpan.org>
+
+ - Merged development version to stable.
+
+0.04_01  2010-07-31  <schubiger@cpan.org>
+
+ - Decode entities with HTML::Entities instead of with HTML::Parser;
+   this fixes broken rewriting when entities are present.
+
+ - Add tests for the entities rewrite fix.
+
+ - Reword some bits of the documentation.
+
+ - Don't force explicit scalar context where an implicit one exists.
+
+ - Omit blessing into a reference within the ::Event constructor.
+
+ - Update broken license link.
+
+0.04 Thu Aug 27 13:38:21 CEST 2009
+
+ - Add HTML filtering capability and according tests.
+
+0.03 Fri Oct 10 21:09:11 CEST 2008
+
+ - Added a method to retrieve the unique event anchor.
+
+0.02 Sun Mar  9 19:30:40 CET 2008
+
+ - Splitted each package within the main module into their own class.
+
+ - Reformatted the documentation.
+
+0.01 Sun Mar  9 15:19:28 CET 2008
+
+ - Initial version.
