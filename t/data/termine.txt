@@ -69,3 +69,15 @@ event 20100212
   location <a href="http://www.solino.ch/">Solino</a>, Am Schanzengraben 15, 8002 Z&uuml;rich (<a href="http://map.search.ch/zuerich/am-schanzengraben-15">Karte</a>)
   responsible <a href="mailto:ventilator@semmel.ch">Martin Ebn&ouml;ther</a>
 endevent
+
+event 20110612
+  weekday So
+  day 12
+  color spec
+endevent
+
+event 20110612
+  weekday So
+  day 12
+  color spec
+endevent

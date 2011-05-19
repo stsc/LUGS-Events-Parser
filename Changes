@@ -1,5 +1,10 @@
 Revision history for Perl extension LUGS::Events::Parser.
 
+0.05_01  2011-05-19  <schubiger@cpan.org>
+
+ - Fix generating an unique anchor when multiple events take place;
+   add some tests.
+
 0.05  2010-11-19  <schubiger@cpan.org>
 
  - Merged development version to stable.

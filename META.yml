@@ -1,6 +1,6 @@
 ---
 name: LUGS-Events-Parser
-version: 0.05
+version: 0.05_01
 author:
   - 'Steven Schubiger <schubiger@cpan.org>'
 abstract: Event parser for the Linux User Group Switzerland
@@ -22,18 +22,18 @@ recommends:
   Test::Pod: 1.14
   Test::Pod::Coverage: 1.04
 configure_requires:
-  Module::Build: 0.34
+  Module::Build: 0.340201
 provides:
   LUGS::Events::Parser:
     file: lib/LUGS/Events/Parser.pm
-    version: 0.05
+    version: 0.05_01
   LUGS::Events::Parser::Event:
     file: lib/LUGS/Events/Parser/Event.pm
-    version: 0.03
+    version: 0.04
   LUGS::Events::Parser::Filter:
     file: lib/LUGS/Events/Parser/Filter.pm
     version: 0.02
-generated_by: Module::Build version 0.34
+generated_by: Module::Build version 0.340201
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4

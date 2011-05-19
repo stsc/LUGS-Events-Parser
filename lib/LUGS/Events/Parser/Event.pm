@@ -3,7 +3,7 @@ package LUGS::Events::Parser::Event;
 use strict;
 use warnings;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 sub new
 {
@@ -100,10 +100,7 @@ sub get_event_anchor
 {
     my $self = shift;
 
-    my ($event, $color) = map $self->{event}->{$_}, qw(event color);
-    my $id = $self->{anchors}{$event}->{$color}++;
-
-    return join '_', ($event, $id, $color);
+    return $self->{event}->{anchor};
 }
 
 1;

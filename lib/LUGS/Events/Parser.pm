@@ -10,7 +10,7 @@ use Data::Schema qw(ds_validate);
 use LUGS::Events::Parser::Event ();
 use Params::Validate ':all';
 
-our $VERSION = '0.05';
+our $VERSION = '0.05_01';
 
 validation_options(
     on_fail => sub
@@ -108,7 +108,7 @@ sub _parse_content
     my $self = shift;
 
     my @events = $self->{content} =~ /(^event .*? ^endevent)/gmsx;
-    my @data;
+    my (@data, %ids);
 
     foreach my $event (@events) {
         my @fields = split /\n/, $event;
@@ -140,6 +140,11 @@ sub _parse_content
             $self->_strip_text(\%fields);
             $self->_decode_entities(\%fields);
         }
+
+        my ($event, $color) = map $fields{$_}, qw(event color);
+        my $id = $ids{$event}->{$color}++;
+        $fields{anchor} = join '_', ($event, $id, $color);
+
         push @data, LUGS::Events::Parser::Event->new(%fields);
     }
 
