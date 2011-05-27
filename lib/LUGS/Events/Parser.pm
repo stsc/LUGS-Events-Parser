@@ -10,7 +10,7 @@ use Data::Schema qw(ds_validate);
 use LUGS::Events::Parser::Event ();
 use Params::Validate ':all';
 
-our $VERSION = '0.05_01';
+our $VERSION = '0.05_02';
 
 validation_options(
     on_fail => sub

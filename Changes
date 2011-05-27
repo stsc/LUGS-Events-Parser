@@ -1,5 +1,13 @@
 Revision history for Perl extension LUGS::Events::Parser.
 
+0.05_02  2011-05-23  <schubiger@cpan.org>
+
+ - Skip documentation tests for non-release testing.
+
+ - Do no longer recommend Test::Pod and Test::Pod::Coverage.
+
+ - Call use_ok() in a loop instead of hard-coding the calls.
+
 0.05_01  2011-05-19  <schubiger@cpan.org>
 
  - Fix generating an unique anchor when multiple events take place;

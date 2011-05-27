@@ -7,7 +7,10 @@ use Test::More tests => 3;
 
 BEGIN
 {
-    use_ok('LUGS::Events::Parser');
-    use_ok('LUGS::Events::Parser::Event');
-    use_ok('LUGS::Events::Parser::Filter');
+    my @modules = (
+        'LUGS::Events::Parser',
+        'LUGS::Events::Parser::Event',
+        'LUGS::Events::Parser::Filter',
+    );
+    use_ok($_) foreach @modules;
 }
