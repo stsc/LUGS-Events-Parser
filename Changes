@@ -1,5 +1,9 @@
 Revision history for Perl extension LUGS::Events::Parser.
 
+0.06  2011-05-28  <schubiger@cpan.org>
+
+ - Merged development version to stable.
+
 0.05_02  2011-05-23  <schubiger@cpan.org>
 
  - Skip documentation tests for non-release testing.

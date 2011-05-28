@@ -1,6 +1,6 @@
 ---
 name: LUGS-Events-Parser
-version: 0.05_02
+version: 0.06
 author:
   - 'Steven Schubiger <schubiger@cpan.org>'
 abstract: Event parser for the Linux User Group Switzerland
@@ -23,7 +23,7 @@ configure_requires:
 provides:
   LUGS::Events::Parser:
     file: lib/LUGS/Events/Parser.pm
-    version: 0.05_02
+    version: 0.06
   LUGS::Events::Parser::Event:
     file: lib/LUGS/Events/Parser/Event.pm
     version: 0.04
