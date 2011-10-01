@@ -1,5 +1,11 @@
 Revision history for Perl extension LUGS::Events::Parser.
 
+0.06_01  2011-09-15  <schubiger@cpan.org>
+
+ - Simplify replacing the content of a field when filtering.
+
+ - Match 1 or more times for greedy event capturing groups.
+
 0.06  2011-05-28  <schubiger@cpan.org>
 
  - Merged development version to stable.

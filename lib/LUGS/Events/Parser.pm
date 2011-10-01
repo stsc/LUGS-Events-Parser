@@ -10,7 +10,7 @@ use Data::Schema qw(ds_validate);
 use LUGS::Events::Parser::Event ();
 use Params::Validate ':all';
 
-our $VERSION = '0.06';
+our $VERSION = '0.06_01';
 
 validation_options(
     on_fail => sub
@@ -115,14 +115,14 @@ sub _parse_content
         my %fields;
 
         foreach my $field (@fields) {
-            if (my ($text) = $field =~ /^event \s+ (.*)/x) {
+            if (my ($text) = $field =~ /^event \s+ (.+)/x) {
                 $fields{event} = $text;
             }
             elsif ($field =~ /^endevent \z/x) {
                 last;
             }
             else {
-                my ($name, $text) = $field =~ /^\s+ (\w+?) \s+ (.*)/x;
+                my ($name, $text) = $field =~ /^\s+ (\w+?) \s+ (.+)/x;
                 if ($self->{Filter_html}) {
                     my @html;
                     $self->_parse_html($text, \@html);

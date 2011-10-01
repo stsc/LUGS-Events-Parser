@@ -1,16 +1,30 @@
 ---
-name: LUGS-Events-Parser
-version: 0.06
+abstract: 'Event parser for the Linux User Group Switzerland'
 author:
   - 'Steven Schubiger <schubiger@cpan.org>'
-abstract: Event parser for the Linux User Group Switzerland
-license: perl
-resources:
-  license: http://dev.perl.org/licenses/
 build_requires:
   File::Spec: 0
   FindBin: 0
   Test::More: 0
+configure_requires:
+  Module::Build: 0.38
+dynamic_config: 1
+generated_by: 'Module::Build version 0.38, CPAN::Meta::Converter version 2.110930'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: LUGS-Events-Parser
+provides:
+  LUGS::Events::Parser:
+    file: lib/LUGS/Events/Parser.pm
+    version: 0.06_01
+  LUGS::Events::Parser::Event:
+    file: lib/LUGS/Events/Parser/Event.pm
+    version: 0.04
+  LUGS::Events::Parser::Filter:
+    file: lib/LUGS/Events/Parser/Filter.pm
+    version: 0.03
 requires:
   Carp: 0
   Data::Schema: 0
@@ -18,19 +32,6 @@ requires:
   HTML::Parser: 0
   Params::Validate: 0
   boolean: 0
-configure_requires:
-  Module::Build: 0.340201
-provides:
-  LUGS::Events::Parser:
-    file: lib/LUGS/Events/Parser.pm
-    version: 0.06
-  LUGS::Events::Parser::Event:
-    file: lib/LUGS/Events/Parser/Event.pm
-    version: 0.04
-  LUGS::Events::Parser::Filter:
-    file: lib/LUGS/Events/Parser/Filter.pm
-    version: 0.02
-generated_by: Module::Build version 0.340201
-meta-spec:
-  url: http://module-build.sourceforge.net/META-spec-v1.4.html
-  version: 1.4
+resources:
+  license: http://dev.perl.org/licenses/
+version: 0.06_01

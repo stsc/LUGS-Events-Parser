@@ -7,7 +7,7 @@ use boolean qw(true);
 use HTML::Entities qw(decode_entities);
 use HTML::Parser ();
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 my (@tags, @stack);
 
@@ -116,9 +116,12 @@ sub _rewrite_tags
                                 $subst =~ s/\$$place_holder/$replacement/;
                             }
                             my $re = $self->_subst_pattern($html, $tag);
-                            my ($text) = $fields->{$field} =~ $re;
-                            my $replace = defined $html->{$tag}->{text} ? $subst : $text;
-                            $fields->{$field} =~ s{$re}{$replace};
+                            if (defined $html->{$tag}->{text}) {
+                                $fields->{$field} =~ s{$re}{$subst};
+                            }
+                            else {
+                                $fields->{$field} =~ s{$re}{$1};
+                            }
                         }
                     }
                 }
