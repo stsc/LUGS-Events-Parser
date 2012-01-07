@@ -30,6 +30,7 @@
          "requires" : {
             "Carp" : 0,
             "Data::Schema" : 0,
+            "DateTime" : 0,
             "HTML::Entities" : 0,
             "HTML::Parser" : 0,
             "Params::Validate" : 0,
@@ -40,7 +41,7 @@
    "provides" : {
       "LUGS::Events::Parser" : {
          "file" : "lib/LUGS/Events/Parser.pm",
-         "version" : "0.07"
+         "version" : "0.07_01"
       },
       "LUGS::Events::Parser::Event" : {
          "file" : "lib/LUGS/Events/Parser/Event.pm",
@@ -51,11 +52,11 @@
          "version" : "0.03"
       }
    },
-   "release_status" : "stable",
+   "release_status" : "testing",
    "resources" : {
       "license" : [
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.07"
+   "version" : "0.07_01"
 }

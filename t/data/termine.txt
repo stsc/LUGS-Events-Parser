@@ -22,8 +22,6 @@ event 20080303
 endevent
 
 event 20080306
-  weekday Do
-  day 6
   time 19:30
   title LugBE Treff
   color bern

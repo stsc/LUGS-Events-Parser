@@ -7,10 +7,11 @@ use boolean qw(true);
 
 use Carp qw(croak);
 use Data::Schema qw(ds_validate);
+use DateTime ();
 use LUGS::Events::Parser::Event ();
 use Params::Validate ':all';
 
-our $VERSION = '0.07';
+our $VERSION = '0.07_01';
 
 validation_options(
     on_fail => sub
@@ -122,7 +123,7 @@ sub _parse_content
                 last;
             }
             else {
-                my ($name, $text) = $field =~ /^\s+ (\w+?) \s+ (.+)/x;
+                my ($name, $text) = $field =~ /^\s+ (\w+?) \s+ (.*)/x;
                 if ($self->{Filter_html}) {
                     my @html;
                     $self->_parse_html($text, \@html);
@@ -140,6 +141,14 @@ sub _parse_content
             $self->_strip_text(\%fields);
             $self->_decode_entities(\%fields);
         }
+
+        my ($year, $month, $day) = $fields{event} =~ /^(\d{4})(\d{2})(\d{2})$/;
+        my $dt = DateTime->new(year => $year, month => $month, day => $day);
+        my $i = 1;
+        my %weekdays = map { $i++ => $_ } qw(Mo Di Mi Do Fr Sa So);
+
+        $fields{day}     ||= $1 if $day =~ /^0?(.+)$/;
+        $fields{weekday} ||= $weekdays{$dt->day_of_week};
 
         my ($event, $color) = map $fields{$_}, qw(event color);
         my $id = $ids{$event}->{$color}++;

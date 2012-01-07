@@ -1,5 +1,11 @@
 Revision history for Perl extension LUGS::Events::Parser.
 
+0.07_01  2012-01-03  <schubiger@cpan.org>
+
+ - Allow for weekday/day to be omitted in the events file.
+
+ - Make the regular field matching regex less strict.
+
 0.07  2011-10-26  <schubiger@cpan.org>
 
  - Merged development version to stable.

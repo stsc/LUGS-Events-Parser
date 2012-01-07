@@ -8,6 +8,7 @@ WriteMakefile
           'EXE_FILES' => [],
           'VERSION_FROM' => 'lib/LUGS/Events/Parser.pm',
           'PREREQ_PM' => {
+                           'DateTime' => 0,
                            'FindBin' => 0,
                            'File::Spec' => 0,
                            'Carp' => 0,

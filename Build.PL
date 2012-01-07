@@ -14,6 +14,7 @@ my $build = Module::Build->new
                  'boolean' => 0,
                  'Carp' => 0,
                  'Data::Schema' => 0,
+                 'DateTime' => 0,
                  'HTML::Entities' => 0,
                  'HTML::Parser' => 0,
                  'Params::Validate' => 0,
