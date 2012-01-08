@@ -1,5 +1,10 @@
 Revision history for Perl extension LUGS::Events::Parser.
 
+0.07_02  2012-01-07  <schubiger@cpan.org>
+
+ - Implement validation of tag handlers and drop Data::Schema
+   as dependency.
+
 0.07_01  2012-01-03  <schubiger@cpan.org>
 
  - Allow for weekday/day to be omitted in the events file.

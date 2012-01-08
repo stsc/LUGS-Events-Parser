@@ -29,10 +29,10 @@
       "runtime" : {
          "requires" : {
             "Carp" : 0,
-            "Data::Schema" : 0,
             "DateTime" : 0,
             "HTML::Entities" : 0,
             "HTML::Parser" : 0,
+            "List::MoreUtils" : 0,
             "Params::Validate" : 0,
             "boolean" : 0
          }
@@ -41,7 +41,7 @@
    "provides" : {
       "LUGS::Events::Parser" : {
          "file" : "lib/LUGS/Events/Parser.pm",
-         "version" : "0.07_01"
+         "version" : "0.07_02"
       },
       "LUGS::Events::Parser::Event" : {
          "file" : "lib/LUGS/Events/Parser/Event.pm",
@@ -58,5 +58,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.07_01"
+   "version" : "0.07_02"
 }

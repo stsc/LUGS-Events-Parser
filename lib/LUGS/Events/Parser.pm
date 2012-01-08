@@ -3,15 +3,15 @@ package LUGS::Events::Parser;
 use strict;
 use warnings;
 use base qw(LUGS::Events::Parser::Filter);
-use boolean qw(true);
+use boolean qw(true false);
 
 use Carp qw(croak);
-use Data::Schema qw(ds_validate);
 use DateTime ();
+use List::MoreUtils qw(all);
 use LUGS::Events::Parser::Event ();
 use Params::Validate ':all';
 
-our $VERSION = '0.07_01';
+our $VERSION = '0.07_02';
 
 validation_options(
     on_fail => sub
@@ -49,19 +49,29 @@ sub _init
         my $valid_handlers = sub
         {
             my ($data) = @_;
-            my $handler = [ 'array', { min_len => 1, of => [ 'hash', {
-                required_keys => [ qw(rewrite fields) ],
-                keys => {
-                    rewrite => [ 'str' ],
-                    fields  => [ 'array', { min_len => 1 } ],
-                },
-            } ] } ];
-            my @keys = keys %$data;
-            my $schema = [ 'hash', {
-                allowed_keys => [ @keys ],
-                keys => { map { $_ => $handler } @keys },
-            } ];
-            return ds_validate($data, $schema)->{success};
+
+            return false unless ref $data eq 'HASH';
+
+            foreach my $tagname (keys %$data) {
+                return false unless ref $data->{$tagname} eq 'ARRAY';
+                return false unless scalar @{$data->{$tagname}};
+
+                foreach my $entry (@{$data->{$tagname}}) {
+                    return false unless ref $entry eq 'HASH';
+
+                    my %keys = map { $_ => true } keys %$entry;
+
+                    return false unless scalar keys %keys == 2;
+                    return false unless all { exists $keys{$_} } qw(rewrite fields);
+
+                    return false unless ref \$entry->{rewrite} eq 'SCALAR';
+                    return false unless ref  $entry->{fields}  eq 'ARRAY';
+
+                    return false unless scalar @{$entry->{fields}};
+                }
+            }
+
+            return true;
         };
 
         my @args = %$opts;

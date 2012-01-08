@@ -14,10 +14,10 @@ WriteMakefile
                            'Carp' => 0,
                            'boolean' => 0,
                            'Test::More' => 0,
-                           'Data::Schema' => 0,
                            'Params::Validate' => 0,
                            'HTML::Parser' => 0,
-                           'HTML::Entities' => 0
+                           'HTML::Entities' => 0,
+                           'List::MoreUtils' => 0
                          }
         )
 ;
