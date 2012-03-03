@@ -18,7 +18,7 @@ name: LUGS-Events-Parser
 provides:
   LUGS::Events::Parser:
     file: lib/LUGS/Events/Parser.pm
-    version: 0.07_02
+    version: 0.08
   LUGS::Events::Parser::Event:
     file: lib/LUGS/Events/Parser/Event.pm
     version: 0.04
@@ -35,4 +35,4 @@ requires:
   boolean: 0
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.07_02
+version: 0.08

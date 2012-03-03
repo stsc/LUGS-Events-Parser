@@ -1,5 +1,9 @@
 Revision history for Perl extension LUGS::Events::Parser.
 
+0.08  2012-01-08  <schubiger@cpan.org>
+
+ - Merged development version to stable.
+
 0.07_02  2012-01-07  <schubiger@cpan.org>
 
  - Implement validation of tag handlers and drop Data::Schema
