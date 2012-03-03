@@ -6,10 +6,6 @@
 section Definitive Daten
 ########################################################################
 
-########################################################################
-month M&auml;rz 2008
-########################################################################
-
 event 20080303
   weekday Mo
   day 3
@@ -56,6 +52,17 @@ event 20090725
   more Kinder, Geschwister, ...), Freunde, ...
   more <br><a href="https://www.lugs.ch/lugs/interna/maillugs/200907/42.html">Mehr Infos</a>
   more (nur mit <a href="https://www.lugs.ch/lugs/badpw.phtml">LUGS Login</a>)
+endevent
+
+event 20120922
+  time 19:00 - 23:00
+  title Franz&ouml;sischer Neujahrsmampf 2012
+  color spec
+  location Standort noch unbekannt
+  responsible <a href="mailto:ceo@fress-und-sauf-verein.ch">Martin Ebn&ouml;ther</a>
+  more Ideen / Vorschl&auml;ge bitte per E-Mail an den
+  more <a href="mailto:ceo@fress-und-sauf-verein.ch?subject=Vorschlag Franz&ouml;sischer Neujahrsmampf 2012">CEO</a>
+  more senden.
 endevent
 
 event 20100212

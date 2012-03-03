@@ -7,7 +7,7 @@ use boolean qw(true);
 use HTML::Entities qw(decode_entities);
 use HTML::Parser ();
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 my (@tags, @stack);
 
@@ -21,6 +21,8 @@ sub _init_parser
         text_h      => [ \&_text_tag,  'text'                 ],
         end_h       => [ \&_end_tag,   'tagname'              ],
     );
+
+   $parser->attr_encoded(true);
 
     return $parser;
 }

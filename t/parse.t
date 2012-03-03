@@ -87,6 +87,23 @@ my @expected = (
       '20090725_0_spec',
     ],
     [
+      '20120922',
+      '2012',
+      '09',
+      '22',
+      '22',
+      'Sa',
+      '19:00 - 23:00',
+      'Franz&ouml;sischer Neujahrsmampf 2012',
+      'spec',
+      'Standort noch unbekannt',
+      '<a href="mailto:ceo@fress-und-sauf-verein.ch">Martin Ebn&ouml;ther</a>',
+      'Ideen / Vorschl&auml;ge bitte per E-Mail an den <a href="mailto:ceo@' .
+        'fress-und-sauf-verein.ch?subject=Vorschlag Franz&ouml;sischer Neuj' .
+        'ahrsmampf 2012">CEO</a> senden.',
+      '20120922_0_spec',
+    ],
+    [
       '20100212',
       '2010',
       '02',

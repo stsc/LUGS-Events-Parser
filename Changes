@@ -1,5 +1,9 @@
 Revision history for Perl extension LUGS::Events::Parser.
 
+0.08_01  2012-03-03  <schubiger@cpan.org>
+
+ - Don't decode entities for attribute values while parsing.
+
 0.08  2012-01-08  <schubiger@cpan.org>
 
  - Merged development version to stable.

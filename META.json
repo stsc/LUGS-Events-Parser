@@ -41,7 +41,7 @@
    "provides" : {
       "LUGS::Events::Parser" : {
          "file" : "lib/LUGS/Events/Parser.pm",
-         "version" : "0.08"
+         "version" : "0.08_01"
       },
       "LUGS::Events::Parser::Event" : {
          "file" : "lib/LUGS/Events/Parser/Event.pm",
@@ -49,14 +49,14 @@
       },
       "LUGS::Events::Parser::Filter" : {
          "file" : "lib/LUGS/Events/Parser/Filter.pm",
-         "version" : "0.03"
+         "version" : "0.04"
       }
    },
-   "release_status" : "stable",
+   "release_status" : "testing",
    "resources" : {
       "license" : [
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.08"
+   "version" : "0.08_01"
 }
