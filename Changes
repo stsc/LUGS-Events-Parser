@@ -1,5 +1,27 @@
 Revision history for Perl extension LUGS::Events::Parser.
 
+0.08_02  2012-04-30  <schubiger@cpan.org>
+
+ - Purge remaining tags without attribute values.
+
+ - Document the purge_tags feature.
+
+ - Exclude rewritten angle bracket pairs from being purged.
+
+ - Strip text only from attribute values or text not within tags.
+
+ - Initialize purge_tags / strip_text options.
+
+ - Add test files for purge_tags / strip_text options.
+
+ - Replace use of tmpnam() with tempfile().
+
+ - List File::Temp in build_requires.
+
+ - Process each event for testing ungrouped.
+
+ - Use here documents in tests instead of string concat.
+
 0.08_01  2012-03-03  <schubiger@cpan.org>
 
  - Don't decode entities for attribute values while parsing.

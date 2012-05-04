@@ -7,7 +7,9 @@ use boolean qw(true);
 use File::Spec;
 use FindBin qw($Bin);
 use LUGS::Events::Parser;
-use Test::More tests => 1;
+use Test::More tests => 8;
+
+my $join = sub { local $_ = shift; chomp; s/\n/ /g; $_ };
 
 my $events_file = File::Spec->catfile($Bin, 'data', 'termine.txt');
 my $parser = LUGS::Events::Parser->new($events_file, {
@@ -47,9 +49,10 @@ my @expected = (
       '20:00',
       'Linux Stammtisch in Winterthur',
       'winti',
-      'Restaurant Pizzeria La Pergola - http://www.la-pergola-winti.ch/' .
-        ', Stadthausstrasse 71, 8400 Winterthur (Karte - http://map.sea' .
-        'rch.ch/8400-winterthur/stadthausstr.-71)',
+      $join->(<<'EOT'),
+Restaurant Pizzeria La Pergola - http://www.la-pergola-winti.ch/, Stadthausstrasse
+71, 8400 Winterthur (Karte - http://map.search.ch/8400-winterthur/stadthausstr.-71)
+EOT
       'Paul Bosshard - Paul.Bosshard@LUGS.ch',
       'Mehr Infos - /lugs/sektionen/winterthur.phtml',
       '20080303_0_winti',
@@ -64,8 +67,10 @@ my @expected = (
       '19:30',
       'LugBE Treff',
       'bern',
-      'Restaurant Beaulieu, Erlachstrasse 3, 3012 Bern (Karte - http://' .
-        'map.search.ch/3012-bern/erlachstr.-3)',
+      $join->(<<'EOT'),
+Restaurant Beaulieu, Erlachstrasse 3, 3012 Bern (Karte -
+http://map.search.ch/3012-bern/erlachstr.-3)
+EOT
       'info@lugbe.ch - info@lugbe.ch',
       'Mehr Infos - http://lugbe.ch/action/nexttreff.phtml',
       '20080306_0_bern',
@@ -80,9 +85,11 @@ my @expected = (
       '19:15',
       'LUGS Treff',
       'treff',
-      'ETH Zürich, HG G 26.5 - http://www.rauminfo.ethz.ch/grundrisspla' .
-        'n.gif?region=Z&areal=Z&gebaeude=HG&geschoss=G&raumNr=26.5 (and' .
-        'erer Raum!)',
+      $join->(<<'EOT'),
+ETH Zürich, HG G 26.5 -
+http://www.rauminfo.ethz.ch/grundrissplan.gif?region=Z&areal=Z&gebaeude=HG&geschoss=G&raumNr=26.5
+(anderer Raum!)
+EOT
       'LUGS Vorstand - lugsvs@lugs.ch',
       'Restaurant nach dem Treff: Auswahl / Anmeldung - http://www.dood' .
         'le.com/mgfpebmxx5ibyt4m (bis 09.07.2009 12:00)',
@@ -98,15 +105,18 @@ my @expected = (
       'ab 17:00',
       'LUGS Grillabend',
       'spec',
-      'Hütte/Areal des Schäferhundeclubs Winterthur (Anreise - http://n' .
-        'eil.franklin.ch/Info_Texts/Anreise_SCOG_Clubhaus.html)',
+      $join->(<<'EOT'),
+Hütte/Areal des Schäferhundeclubs Winterthur (Anreise -
+http://neil.franklin.ch/Info_Texts/Anreise_SCOG_Clubhaus.html)
+EOT
       'Neil Franklin - neil@franklin.ch',
-      'Wie schon die letzten Jahre werden wir auch dieses Jahr wieder e' .
-        'ine LUGS-Grillparty durchführen. Teilnehmer: LUGS Mitglieder (' .
-        'und werdende), Familie (Freund(in), Kinder, Geschwister, ...),' .
-        ' Freunde, ... Mehr Infos - https://www.lugs.ch/lugs/interna/ma' .
-        'illugs/200907/42.html (nur mit LUGS Login - https://www.lugs.c' .
-        'h/lugs/badpw.phtml)',
+      $join->(<<'EOT'),
+Wie schon die letzten Jahre werden wir auch dieses Jahr wieder eine LUGS-Grillparty
+durchführen. Teilnehmer: LUGS Mitglieder (und werdende), Familie (Freund(in), Kinder,
+Geschwister, ...), Freunde, ... Mehr Infos -
+https://www.lugs.ch/lugs/interna/maillugs/200907/42.html (nur mit LUGS Login -
+https://www.lugs.ch/lugs/badpw.phtml)
+EOT
       '20090725_0_spec',
     ],
     [
@@ -121,9 +131,10 @@ my @expected = (
       'spec',
       'Standort noch unbekannt',
       'Martin Ebnöther - ceo@fress-und-sauf-verein.ch',
-      'Ideen / Vorschläge bitte per E-Mail an den CEO - ceo@fress-und-s' .
-        'auf-verein.ch?subject=Vorschlag Französischer Neujahrsmampf 20' .
-        '12 senden.',
+      $join->(<<'EOT'),
+Ideen / Vorschläge bitte per E-Mail an den CEO - ceo@fress-und-sauf-verein.ch?subject=Vorschlag
+Französischer Neujahrsmampf 2012 senden.
+EOT
       '20120922_0_spec',
     ],
     [
@@ -136,8 +147,10 @@ my @expected = (
       '19:15',
       'LUGS Treff - Voodoo, Schwarze Magie und Internet per UMTS',
       'treff',
-      'Solino - http://www.solino.ch/, Am Schanzengraben 15, 8002 Züric' .
-        'h (Karte - http://map.search.ch/zuerich/am-schanzengraben-15)',
+      $join->(<<'EOT'),
+Solino - http://www.solino.ch/, Am Schanzengraben 15, 8002 Zürich (Karte -
+http://map.search.ch/zuerich/am-schanzengraben-15)
+EOT
       'Martin Ebnöther - ventilator@semmel.ch',
       undef,
       '20100212_0_treff',
@@ -193,4 +206,7 @@ while (my $event = $parser->next_event) {
     ];
 }
 
-is_deeply(\@events, \@expected, 'Events parsing with HTML filtering');
+foreach my $i (0 .. $#events) {
+    my $counter = $i + 1 . '/' . scalar @events;
+    is_deeply($events[$i], $expected[$i], "Filtering of event $counter");
+}

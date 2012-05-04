@@ -17,6 +17,7 @@ WriteMakefile
                            'Params::Validate' => 0,
                            'HTML::Parser' => 0,
                            'HTML::Entities' => 0,
+                           'File::Temp' => 0,
                            'List::MoreUtils' => 0
                          }
         )

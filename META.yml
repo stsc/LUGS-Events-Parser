@@ -4,12 +4,13 @@ author:
   - 'Steven Schubiger <schubiger@cpan.org>'
 build_requires:
   File::Spec: 0
+  File::Temp: 0
   FindBin: 0
   Test::More: 0
 configure_requires:
   Module::Build: 0.38
 dynamic_config: 1
-generated_by: 'Module::Build version 0.38, CPAN::Meta::Converter version 2.110930'
+generated_by: 'Module::Build version 0.38, CPAN::Meta::Converter version 2.112150'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -18,13 +19,13 @@ name: LUGS-Events-Parser
 provides:
   LUGS::Events::Parser:
     file: lib/LUGS/Events/Parser.pm
-    version: 0.08_01
+    version: 0.08_02
   LUGS::Events::Parser::Event:
     file: lib/LUGS/Events/Parser/Event.pm
     version: 0.04
   LUGS::Events::Parser::Filter:
     file: lib/LUGS/Events/Parser/Filter.pm
-    version: 0.04
+    version: 0.05
 requires:
   Carp: 0
   DateTime: 0
@@ -35,4 +36,4 @@ requires:
   boolean: 0
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.08_01
+version: 0.08_02

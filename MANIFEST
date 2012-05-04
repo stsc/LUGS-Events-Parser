@@ -10,8 +10,10 @@ META.json
 META.yml
 README
 t/00-load.t
+t/clean.t
 t/data/termine.txt
 t/filter.t
 t/parse.t
 t/pod-coverage.t
 t/pod.t
+t/strip.t

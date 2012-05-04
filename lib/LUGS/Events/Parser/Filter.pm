@@ -7,7 +7,7 @@ use boolean qw(true);
 use HTML::Entities qw(decode_entities);
 use HTML::Parser ();
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 my (@tags, @stack);
 
@@ -22,7 +22,7 @@ sub _init_parser
         end_h       => [ \&_end_tag,   'tagname'              ],
     );
 
-   $parser->attr_encoded(true);
+    $parser->attr_encoded(true);
 
     return $parser;
 }
@@ -87,6 +87,15 @@ sub _rewrite_tags
     my $self = shift;
     my ($fields) = @_;
 
+    my $preserve_brackets = sub
+    {
+        my ($field, $subst) = @_;
+        my %purge_tags = map { $_ => true } @{$self->{Purge_tags}};
+        return unless $purge_tags{$field};
+        my $pkg = __PACKAGE__;
+        $$subst =~ s/<(.+?)>/\[$pkg\]$1\[\/$pkg\]/g;
+    };
+
     foreach my $field (keys %{$fields->{_html}}) {
         my %rewritten;
         foreach my $html (@{$fields->{_html}->{$field}}) {
@@ -119,6 +128,7 @@ sub _rewrite_tags
                             }
                             my $re = $self->_subst_pattern($html, $tag);
                             if (defined $html->{$tag}->{text}) {
+                                $preserve_brackets->($field, \$subst);
                                 $fields->{$field} =~ s{$re}{$subst};
                             }
                             else {
@@ -137,11 +147,36 @@ sub _rewrite_tags
                         && $fields->{$field} !~ m{</$tagname>}
                     ) {
                         my $subst = $handler->{rewrite};
+                        $preserve_brackets->($field, \$subst);
                         $fields->{$field} =~ s{<$tagname>}{$subst}g;
                     }
                 }
             }
         }
+    }
+}
+
+sub _purge_tags
+{
+    my $self = shift;
+    my ($fields) = @_;
+
+    my $pkg = __PACKAGE__;
+
+    my %subst = (
+        "[$pkg]"  => '<',
+        "[/$pkg]" => '>',
+    );
+
+    foreach my $field (grep { !/^\_/ && exists $fields->{$_} } @{$self->{Purge_tags}}) {
+        $fields->{$field} = do {
+            local $_ = $fields->{$field};
+            s/<\/?\w+?>//g;
+            s/^\s+//;
+            s/\s+$//;
+            $_
+        };
+        $fields->{$field} =~ s/(\[\/?$pkg\])/$subst{$1}/g;
     }
 }
 
@@ -152,7 +187,12 @@ sub _strip_text
 
     foreach my $field (grep !/^\_/, keys %$fields) {
         foreach my $item (@{$self->{Strip_text}}) {
-            $fields->{$field} =~ s/\Q$item\E//gi;
+            while ($fields->{$field} =~ /<.+?"[^"]*?(?=\Q$item\E[^"]*?".*?>)/gi) {
+                $fields->{$field} =~ s/\G\Q$item\E//i;
+            }
+            while ($fields->{$field} =~ /(?:^|>)[^<>]*?(?=\Q$item\E[^<>]*?(?:<|$))/gi) {
+                $fields->{$field} =~ s/\G\Q$item\E//i;
+            }
         }
     }
 }

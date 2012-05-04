@@ -11,7 +11,7 @@ use List::MoreUtils qw(all);
 use LUGS::Events::Parser::Event ();
 use Params::Validate ':all';
 
-our $VERSION = '0.08_01';
+our $VERSION = '0.08_02';
 
 validation_options(
     on_fail => sub
@@ -89,15 +89,22 @@ sub _init
                     },
                 },
             },
+            purge_tags => {
+                type => ARRAYREF,
+                optional => true,
+            },
             strip_text => {
                 type => ARRAYREF,
                 optional => true,
             },
         });
 
-        foreach my $opt (qw(filter_html strip_text tag_handlers)) {
+        foreach my $opt (qw(filter_html purge_tags strip_text tag_handlers)) {
             $self->{ucfirst $opt} = $opts->{$opt};
         }
+
+        $self->{Purge_tags} ||= [];
+        $self->{Strip_text} ||= [];
     }
 
     if ($self->{Filter_html}) {
@@ -148,6 +155,7 @@ sub _parse_content
 
         if ($self->{Filter_html}) {
             $self->_rewrite_tags(\%fields);
+            $self->_purge_tags(\%fields);
             $self->_strip_text(\%fields);
             $self->_decode_entities(\%fields);
         }
@@ -225,6 +233,7 @@ With filtering options (example):
                    fields  => [ qw(location responsible) ],
                } ],
            },
+           purge_tags => [ qw(responsible) ],
            strip_text => [ 'mailto:' ],
  });
 
@@ -237,6 +246,11 @@ Extract HTML and rewrite it. Accepts a boolean.
 =item * C<tag_handlers>
 
 Handlers for rewriting HTML. See L<TAG HANDLERS> for a format explanation.
+
+=item * C<purge_tags>
+
+Optionally purge all remaining tags without attribute values. Accepts an
+array reference with field names.
 
 =item * C<strip_text>
 
@@ -336,14 +350,15 @@ Fetch the unique event anchor.
 Filtering HTML markup and separating it from plaintext is optional and may
 be enabled via the C<filter_html> option. The C<filter_html> option set on
 its own does not suffice since no according tag handlers are defined which
-must be provided by the C<tag_handlers> option. The C<strip_text> option
-may contain literal strings to be removed from the filtered and rewritten
-content.
+must be provided by the C<tag_handlers> option. Remaining tags without
+attribute values may be purged by the C<purge_tags> option. The C<strip_text>
+option may contain literal strings to be removed from the filtered and
+rewritten content.
 
 The order of processing is: HTML markup is filtered first and then being
-rewritten by the according tag handlers. Next literal strings as specified
-are stripped from the content. Finally HTML entities are unconditionally
-decoded.
+rewritten by the according tag handlers. Next tags are purged if requested.
+Then literal strings as specified are stripped from the content. Finally,
+HTML entities are unconditionally decoded.
 
 C<LUGS::Events::Parser> internally uses L<HTML::Parser> to push tags and text
 on a stack. If tags are nested, the innermost tag will be retrieved first and
