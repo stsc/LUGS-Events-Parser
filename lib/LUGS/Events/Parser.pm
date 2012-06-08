@@ -11,7 +11,7 @@ use List::MoreUtils qw(all);
 use LUGS::Events::Parser::Event ();
 use Params::Validate ':all';
 
-our $VERSION = '0.09';
+our $VERSION = '0.09_01';
 
 validation_options(
     on_fail => sub
@@ -145,6 +145,7 @@ sub _parse_content
                     my @html;
                     $self->_parse_html($text, \@html);
                     if (@html) {
+                        $self->_strip_html(\@html);
                         push @{$fields{_html}->{$name}}, @html;
                     }
                 }
@@ -154,9 +155,9 @@ sub _parse_content
         }
 
         if ($self->{Filter_html}) {
+            $self->_strip_text(\%fields);
             $self->_rewrite_tags(\%fields);
             $self->_purge_tags(\%fields);
-            $self->_strip_text(\%fields);
             $self->_decode_entities(\%fields);
         }
 

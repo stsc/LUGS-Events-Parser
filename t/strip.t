@@ -17,9 +17,9 @@ close($fh);
 my $parser = LUGS::Events::Parser->new($tmpfile, {
     filter_html  => true,
     tag_handlers => {
-        'bogus' => [ {
-            rewrite => '',
-            fields  => [ '*' ],
+        'a href' => [ {
+            rewrite => '$TEXT - <$HREF>',
+            fields  => [ qw(responsible) ],
         } ],
     },
     strip_text => [
@@ -34,12 +34,12 @@ my $parser = LUGS::Events::Parser->new($tmpfile, {
 my @expected = (
     [
       'Restaurant Beaulieu, Erlachstrasse 3,  Bern (<a href="http://map.search.ch/-bern/erlachstr.-3">Karte</a>)',
-      '<a href="info@lugbe.ch">LugBE</a>',
+      'LugBE - <info@lugbe.ch>',
       '<a href="http://lugbe.ch/action/index.phtml">Mehr Infos</a>',
     ],
     [
       'Standort unbekannt',
-      '<a href="lugsvs@lugs.ch">LUGS</a>',
+      'LUGS - <lugsvs@lugs.ch>',
       $join->(<<'EOT'),
 Spezial-Event: Ideen / Vorschläge bitte per E-Mail an den
 <a href="lugsvs@lugs.ch?subject=Vorschlag Spezial-Event 03.05.2012">Vorstand</a>

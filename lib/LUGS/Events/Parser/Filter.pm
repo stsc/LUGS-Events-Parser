@@ -7,7 +7,7 @@ use boolean qw(true);
 use HTML::Entities qw(decode_entities);
 use HTML::Parser ();
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 my (@tags, @stack);
 
@@ -177,6 +177,27 @@ sub _purge_tags
             $_
         };
         $fields->{$field} =~ s/(\[\/?$pkg\])/$subst{$1}/g;
+    }
+}
+
+sub _strip_html
+{
+    my $self = shift;
+    my ($html) = @_;
+
+    foreach my $html (@$html) {
+        foreach my $tag (keys %$html)  {
+            foreach my $item (@{$self->{Strip_text}}) {
+                if (defined $html->{$tag}->{text}) {
+                    $html->{$tag}->{text} =~ s/\Q$item\E//gi;
+                }
+                foreach my $attr (keys %{$html->{$tag}->{attr}}) {
+                    if (defined $html->{$tag}->{attr}->{$attr}) {
+                        $html->{$tag}->{attr}->{$attr} =~ s/\Q$item\E//gi;
+                    }
+                }
+            }
+        }
     }
 }
 
