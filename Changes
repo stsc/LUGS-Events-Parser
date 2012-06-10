@@ -1,5 +1,9 @@
 Revision history for Perl extension LUGS::Events::Parser.
 
+0.10  2012-06-09  <schubiger@cpan.org>
+
+ - Merged development version to stable.
+
 0.09_01  2012-06-02  <schubiger@cpan.org>
 
  - Strip from html/text before rewriting tags.

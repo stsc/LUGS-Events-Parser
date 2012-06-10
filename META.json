@@ -42,7 +42,7 @@
    "provides" : {
       "LUGS::Events::Parser" : {
          "file" : "lib/LUGS/Events/Parser.pm",
-         "version" : "0.09_01"
+         "version" : "0.10"
       },
       "LUGS::Events::Parser::Event" : {
          "file" : "lib/LUGS/Events/Parser/Event.pm",
@@ -53,11 +53,11 @@
          "version" : "0.06"
       }
    },
-   "release_status" : "testing",
+   "release_status" : "stable",
    "resources" : {
       "license" : [
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.09_01"
+   "version" : "0.10"
 }
