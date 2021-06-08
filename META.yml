@@ -19,7 +19,7 @@ name: LUGS-Events-Parser
 provides:
   LUGS::Events::Parser:
     file: lib/LUGS/Events/Parser.pm
-    version: 0.11_01
+    version: '0.12'
   LUGS::Events::Parser::Event:
     file: lib/LUGS/Events/Parser/Event.pm
     version: '0.04'
@@ -37,5 +37,5 @@ requires:
 resources:
   license: http://dev.perl.org/licenses/
   repository: https://github.com/stsc/LUGS-Events-Parser
-version: 0.11_01
+version: '0.12'
 x_serialization_backend: 'CPAN::Meta::YAML version 0.018'

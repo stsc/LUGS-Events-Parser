@@ -1,5 +1,9 @@
 Revision history for Perl extension LUGS::Events::Parser.
 
+0.12  2021-06-08  <schubiger@cpan.org>
+
+ - Merged development version to stable.
+
 0.11_01  2021-06-07  <schubiger@cpan.org>
 
  - Fix encoding issue when decoding entities;
